@@ -22,7 +22,7 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form @submit.prevent="submitLogin">
                     <div class="mb-3">
                       <argon-input type="email" placeholder="Email" name="email" size="lg" />
                     </div>
@@ -38,6 +38,7 @@
                         color="success"
                         fullWidth
                         size="lg"
+                        type="submit"
                       >Sign in</argon-button>
                     </div>
                   </form>
@@ -78,6 +79,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import d$auth from '@/stores/auth';
+
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
@@ -92,6 +96,25 @@ export default {
     ArgonSwitch,
     ArgonButton,
   },
+  data: () => ({
+    //input
+    input: {
+      username: '',
+      password: '',
+    }
+  }),
+  methods: {
+    ...mapActions(d$auth, ['a$login']),
+    async submitLogin() {
+      try {
+        await this.a$login({ ...this.input });
+        this.$router.replace({name: 'Default'});
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  },
+
   created() {
     this.$store.state.hideConfigButton = true;
     this.$store.state.showNavbar = false;
