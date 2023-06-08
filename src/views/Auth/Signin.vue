@@ -24,10 +24,10 @@
                 <div class="card-body">
                   <form @submit.prevent="submitLogin">
                     <div class="mb-3">
-                      <argon-input type="email" placeholder="Email" name="email" size="lg" />
+                      <argon-input v-model="input.username" type="email" placeholder="Email" name="email" size="lg" />
                     </div>
                     <div class="mb-3">
-                      <argon-input type="password" placeholder="Password" name="password" size="lg" />
+                      <argon-input v-model="input.password" type="password" placeholder="Password" name="password" size="lg" />
                     </div>
                     <argon-switch id="rememberMe">Remember me</argon-switch>
 
@@ -83,9 +83,9 @@ import { mapActions } from 'pinia';
 import d$auth from '@/stores/auth';
 
 import Navbar from "@/examples/PageLayout/Navbar.vue";
-import ArgonInput from "@/components/ArgonInput.vue";
+import ArgonInput from "../../components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
-import ArgonButton from "@/components/ArgonButton.vue";
+import ArgonButton from "../../components/ArgonButton.vue";
 const body = document.getElementsByTagName("body")[0];
 
 export default {

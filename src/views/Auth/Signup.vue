@@ -96,10 +96,10 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form">
-                <argon-input type="text" placeholder="Name" aria-label="Name" />
-                <argon-input type="email" placeholder="Email" aria-label="Email" />
-                <argon-input type="password" placeholder="Password" aria-label="Password" />
+              <form @submit.prevent="submitReg">
+                <argon-input v-model="input.name" type="text" placeholder="Name" aria-label="Name" />
+                <argon-input v-model="input.username" type="email" placeholder="Email" aria-label="Email" />
+                <argon-input v-model="input.password" type="password" placeholder="Password" aria-label="Password" />
                 <argon-checkbox checked>
                   <label class="form-check-label" for="flexCheckDefault">
                     I agree the
@@ -130,6 +130,9 @@
 </template>
 
 <script>
+import { mapActions } from 'pinia';
+import d$auth from '@/stores/auth';
+
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import AppFooter from "@/examples/PageLayout/Footer.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
@@ -138,13 +141,33 @@ import ArgonButton from "@/components/ArgonButton.vue";
 const body = document.getElementsByTagName("body")[0];
 
 export default {
-  name: "signin",
+  name: "signup",
   components: {
     Navbar,
     AppFooter,
     ArgonInput,
     ArgonCheckbox,
     ArgonButton,
+  },
+
+  data: () => ({
+    //input
+    input: {
+      name: '',
+      username: '',
+      password: '',
+    }
+  }),
+  methods: {
+    ...mapActions(d$auth, ['a$setUser']),
+    async submitReg() {
+      try {
+        await this.a$setUser({ ...this.input });
+        this.$router.replace({name: 'Default'});
+      } catch (e) {
+        console.error(e);
+      }
+    }
   },
   created() {
     this.$store.state.hideConfigButton = true;

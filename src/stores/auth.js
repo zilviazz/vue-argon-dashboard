@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import * as s$auth from "../sevices/auth";
 import { certCookies, setCookies } from "../plugins/cookies";
 import parseJwt from "../plugins/parseJwt";
 
@@ -26,7 +27,7 @@ const d$auth = defineStore({
         },
         async a$login(body) {
             try {
-                const { data } = await d$auth.login(body);
+                const { data } = await s$auth.login(body);
                 setCookies('CERT', data.token, { datetime: data.expiresAt});
                 this.a$setUser();
                 return true;
