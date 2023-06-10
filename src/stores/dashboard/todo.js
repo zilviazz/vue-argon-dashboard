@@ -28,12 +28,38 @@ export const useListStore = defineStore({
         throw message ?? error
       }
     },
-    removeIndex(index) {
-      this.list = this.list.filter((val, idx) => index !== idx)
+    async deleteData(id) {
+      try {
+        await deleteData(id);
+        this.removeData(id);
+      } catch (error) {
+        console.error(error);
+      }
     },
-    editIndex(index, data) {
-      this.list[index] = data
+    removeData(id) {
+      this.dataList = this.dataList.filter(data => data.id !== id);
+    }, 
+    async updateData({ id, newData }) {
+      try {
+        await updateData(id, newData);
+        this.updateDataInList({ id, newData });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    updateDataInList({ id, newData }) {
+      const index = this.dataList.findIndex(data => data.id === id);
+      if (index !== -1) {
+        this.dataList.splice(index, 1, newData);
+      }
     }
+
+    // removeIndex(index) {
+    //   this.list = this.list.filter((val, idx) => index !== idx)
+    // },
+    // editIndex(index, data) {
+    //   this.list[index] = data
+    // }
   },
   getters: {
     g$list: ({ list }) => list,

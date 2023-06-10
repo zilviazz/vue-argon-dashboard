@@ -31,6 +31,12 @@ const dashboard = {
             name: "Profile",
             component: () => import('@/views/Dashboard/Profile.vue'),
             meta: { auth: true },
+        },
+        {
+            path: "form",
+            name: "Form",
+            component: () => import('@/views/Dashboard/Form.vue'),
+            meta: { auth: true },
         }
     ],
 };
