@@ -2,54 +2,46 @@
   <div class="py-4 container-fluid">
     <div class=" row">
       <div class="col-12">
-        <authors-table />
-      </div>
-    </div>
-    <div class="mt-4 row">
-      <div class="col-12">
-        <projects-table />
+        <ComponentTable :data="g$list" :fields="fields" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AuthorsTable from "@/components/examples/AuthorsTable.vue";
-import ProjectsTable from "@/components/examples/ProjectsTable.vue";
+import ComponentTable from "../../components/ComponentTable.vue"
+// import AuthorsTable from "@/components/examples/AuthorsTable.vue";
+// import ProjectsTable from "@/components/examples/ProjectsTable.vue";
+
+import d$todo from "../../stores/dashboard/todo";
+import { mapActions, mapState } from "pinia";
 
 export default {
   name: "tables",
   components: {
-    AuthorsTable,
-    ProjectsTable
+    ComponentTable,
   },
   data() {
     return {
-      stats: {
-        titleColor: "opacity-7 text-white",
-        descColor: "text-white",
-        trip: {
-          title: "Today's Trip",
-          desc: "145 KM",
-          classIcon: "text-dark ni ni-money-coins",
-        },
-        health: {
-          title: "Battery Health",
-          desc: "99 %",
-          classIcon: "text-dark ni ni-controller ",
-        },
-        speed: {
-          title: "Average Speed",
-          desc: "56 Km/h",
-          classIcon: "text-dark ni ni-delivery-fast",
-        },
-        volume: {
-          title: "Music Volume",
-          desc: "15/100",
-          classIcon: "text-dark ni ni-note-03",
-        },
-      },
+      fields: [
+          'id',
+          'title',
+          'createdAt',
+          'completed',
+          'description',
+        ]
     };
   },
+  computed :{
+    ...mapState(d$todo, ['g$list'])
+  },
+  async created(){
+    await this.a$list();
+  },
+  methods :{
+    ...mapActions(d$todo, ['a$list'])
+  }
 };
 </script>
+
+

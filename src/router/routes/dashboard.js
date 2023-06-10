@@ -21,6 +21,12 @@ const dashboard = {
             meta: { auth: true },
         },
         {
+            path: "todo",
+            name: "ToDo",
+            component: () => import('@/views/Dashboard/ToDo.vue'),
+            meta: { auth: true },
+        },
+        {
             path: "profile",
             name: "Profile",
             component: () => import('@/views/Dashboard/Profile.vue'),

@@ -159,10 +159,10 @@ export default {
     }
   }),
   methods: {
-    ...mapActions(d$auth, ['a$setUser']),
+    ...mapActions(d$auth, ['a$register']),
     async submitReg() {
       try {
-        await this.a$setUser({ ...this.input });
+        await this.a$register({ ...this.input });
         this.$router.replace({name: 'Default'});
       } catch (e) {
         console.error(e);

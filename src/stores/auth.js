@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import * as s$auth from "../sevices/auth";
-import { certCookies, setCookies } from "../plugins/cookies";
+import { certCookies, delCookies, setCookies } from "../plugins/cookies";
 import parseJwt from "../plugins/parseJwt";
 
 const d$auth = defineStore({
@@ -33,6 +33,21 @@ const d$auth = defineStore({
                 return true;
             } catch ({ error, message }){
                 throw message ?? error;
+            }
+        },
+        async a$register(body) {
+            try {
+                await s$auth.register(body);
+            } catch ({ error, message }){
+                throw message ?? error;
+            }
+        },
+        async a$logout() {
+            try {
+                delCookies('CERT');
+            } catch (error){
+                console.log(error);
+                throw error;
             }
         }
     },

@@ -28,7 +28,7 @@
           </template>
         </sidenav-item>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <sidenav-item
           url="/dashboard/billing"
           :class="getRoute() === 'billing' ? 'active' : ''"
@@ -38,7 +38,7 @@
             <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
           </template>
         </sidenav-item>
-      </li>
+      </li> -->
       <li class="mt-3 nav-item">
         <h6
           v-if="this.$store.state.isRTL"
@@ -55,7 +55,7 @@
           ACCOUNT PAGES
         </h6>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <sidenav-item
           url="/dashboard/profile"
           :class="getRoute() === 'profile' ? 'active' : ''"
@@ -65,7 +65,7 @@
             <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
           </template>
         </sidenav-item>
-      </li>
+      </li> -->
       <li class="nav-item">
         <sidenav-item
           url="/auth/signin"
@@ -91,16 +91,22 @@
     </ul>
   </div>
   <div class="pt-3 mx-3 mt-3 sidenav-footer">
-    <sidenav-card
+    <!-- <sidenav-card
       :class="cardBg"
       textPrimary="Need Help?"
       textSecondary="Please check our docs"
-    />
+    /> -->
+    <argon-button color="danger" full-width @click="a$logout">Sign Out</argon-button>
   </div>
 </template>
 <script>
 import SidenavItem from "./SidenavItem.vue";
 import SidenavCard from "./SidenavCard.vue";
+
+import ArgonButton from "../../components/ArgonButton.vue";
+
+import d$auth from "../../stores/auth";
+import { mapActions } from "pinia";
 
 export default {
   name: "SidenavList",
@@ -116,12 +122,18 @@ export default {
   },
   components: {
     SidenavItem,
-    SidenavCard
+    SidenavCard,
+    ArgonButton
   },
   methods: {
+    ...mapActions(d$auth, ['a$logout']),
     getRoute() {
       const routeArr = this.$route.path.split("/");
       return routeArr[1];
+    },
+    submitLogout(){
+      this.a$logout();
+      this.$router.replace({ name: 'Signin'});
     }
   }
 };
