@@ -10,8 +10,6 @@
 
 <script>
 import ComponentTable from "../../components/ComponentTable.vue"
-// import AuthorsTable from "@/components/examples/AuthorsTable.vue";
-// import ProjectsTable from "@/components/examples/ProjectsTable.vue";
 
 import d$todo from "../../stores/dashboard/todo";
 import { mapActions, mapState } from "pinia";

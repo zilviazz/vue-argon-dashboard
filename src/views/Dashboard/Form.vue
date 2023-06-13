@@ -1,7 +1,7 @@
 <template>
   <main class="main-content mt-0">
     <div class="mt-2 position-relative text-center">
-        <h2>Tambah Data</h2>
+        <h2>New Task</h2>
     </div>
     <div class="container">
           <div class="card z-index-0">
@@ -11,7 +11,7 @@
                         <argon-input v-model="input.description" type="text" placeholder="Description" aria-label="Description" />
                         <argon-input v-model="input.category" type="text" placeholder="Category" aria-label="Category" />
                         <div class="text-center">
-                        <argon-button fullWidth color="dark" variant="gradient" class="my-4 mb-2">Tambah</argon-button>
+                        <argon-button fullWidth color="dark" variant="gradient" class="my-4 mb-2">Add</argon-button>
                         </div>
                     </form>
                 </div>

@@ -11,7 +11,7 @@ const dashboard = {
         {
             path: "tables",
             name: "Tables",
-            component: () => import('@/views/Dashboard/Tables.vue'),
+            component: () => import('@/views/Dashboard/ListView.vue'),
             meta: { auth: true },
         },
         {
@@ -36,6 +36,12 @@ const dashboard = {
             path: "form",
             name: "Form",
             component: () => import('@/views/Dashboard/Form.vue'),
+            meta: { auth: true },
+        },
+        {
+            path: "formadd",
+            name: "FormAdd",
+            component: () => import('@/views/Dashboard/FormAdd.vue'),
             meta: { auth: true },
         }
     ],
