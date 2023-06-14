@@ -28,7 +28,13 @@ export const useListStore = defineStore({
         throw message ?? error
       }
     },
-    removeIndex(index) {
+    async removeIndex(index) {
+      try {
+        await s$todo.del(id)
+        await this.a$list()
+      } catch ({ message, error }) {
+        throw message ?? error
+      }
       this.list = this.list.filter((val, idx) => index !== idx)
     },
     editIndex(index, data) {
