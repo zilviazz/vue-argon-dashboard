@@ -164,13 +164,13 @@ export default {
 
     <hr />
 
-    <ol class="list">
+    <!-- <ol class="list">
       <template v-for="(item, index) in g$list" :key="index">
         <li
           @dblclick="() => toggleCompleted(index)"
           :class="{ strike: item.completed }"
         >
-          <!-- trigger delete by index -->
+         
           <button
             class="red"
             @click="() => removeIndex(index)"
@@ -178,7 +178,7 @@ export default {
           >
             &times;
           </button>
-          <!-- trigger edit by index -->
+          
           <button
             class="orange"
             @click="openForm(),detailList(index)"
@@ -190,7 +190,7 @@ export default {
           {{ item?.description ? `- ${item.description}` : '' }}
         </li>
       </template>
-    </ol>
+    </ol> -->
 
     <hr />
 
